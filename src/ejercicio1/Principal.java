@@ -40,13 +40,28 @@ public class Principal {
 			}
 
 			//que permita ordenar los datos según el Apellido desde la A – Z
-			//Ver persona compareTo()
-			Iterator<Persona> it = listPersonas.iterator();
+			Persona[] listaOrdenada = listPersonas.toArray(new Persona[0]);
+			//Arrays.sort(listaOrdenada);
+			Persona aux;
+			for(int i = 0; i < listaOrdenada.length;i++) {
+				for(int i2 = 0; i2 < listaOrdenada.length;i2++) {
+					if(listaOrdenada[i].compareTo(listaOrdenada[i2])==1) {
+						aux = listaOrdenada[i];
+						listaOrdenada[i] = listaOrdenada[i2];
+						listaOrdenada[i2] = aux;
+					}
+				}
+			}
+			for(Persona p : listaOrdenada) {
+				System.out.println(p.toString());
+			}
+			
+			/*Iterator<Persona> it = listPersonas.iterator();
 			while (it.hasNext()) {
 				Persona p = it.next();
 				archivo2.escribirArchivo(p.toString());
 				System.out.println(p.toString());
-			}
+			}*/
 		} catch (DniInvalido e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

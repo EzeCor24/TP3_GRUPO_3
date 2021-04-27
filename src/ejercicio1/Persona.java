@@ -35,7 +35,7 @@ public class Persona implements Comparable<Persona> {
 		// return -1;
 		if (this.apellido.compareToIgnoreCase(p.getApellido()) == 0) {
 			return 0;
-		} else if (this.apellido.compareToIgnoreCase(p.getApellido()) == 1) {
+		} else if (this.apellido.compareToIgnoreCase(p.getApellido()) > 1) {
 			return -1;
 		} else {
 			return 1;
