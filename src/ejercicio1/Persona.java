@@ -26,20 +26,7 @@ public class Persona implements Comparable<Persona> {
 	@Override
 	public int compareTo(Persona p) {
 		//que permita ordenar los datos según el Apellido desde la A – Z
-		
-		// if(p.getApellido().equals(this.apellido)) {
-		// return 0;
-		// }else if(p.getApellido().hashCode() < this.apellido.hashCode()) {
-		// return 1;
-		// }
-		// return -1;
-		if (this.apellido.compareToIgnoreCase(p.getApellido()) == 0) {
-			return 0;
-		} else if (this.apellido.compareToIgnoreCase(p.getApellido()) > 1) {
-			return -1;
-		} else {
-			return 1;
-		}
+		return this.apellido.compareToIgnoreCase(p.getApellido());
 	}
 
 	// Método hashCode()

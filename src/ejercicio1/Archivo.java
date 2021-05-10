@@ -57,7 +57,7 @@ public class Archivo {
 		}
 	}
 
-	public TreeSet<Persona> leer_lineas() throws DniInvalido{
+	public TreeSet<Persona> leer_lineas() {
 		TreeSet<Persona> listPersonas = new TreeSet<Persona>();
 		Persona persona = new Persona();
 		FileReader entrada;
@@ -65,35 +65,42 @@ public class Archivo {
 			entrada = new FileReader(ruta);
 			BufferedReader miBuffer = new BufferedReader(entrada);
 			
-			String linea = "";
+			String linea = miBuffer.readLine();
 			while(linea != null){
-				linea = miBuffer.readLine();
-				if(linea != null) {
-					persona = separarCampos(linea);
-					if(persona.verificarDniInvalido(persona.getDni())) {
-						System.out.println("Se descarto a " + persona.toString());
-					}else {
+				persona = separarCampos(linea);
+				if (persona != null) {
+					try {
+						persona.verificarDniInvalido(persona.getDni());
 						listPersonas.add(persona);
-					}	
+					}catch (DniInvalido e) {
+						System.out.println("Se descarto a " + persona.toString() + ". " + e);
+					}
 				}
+				linea = miBuffer.readLine();
 			}
 			miBuffer.close();
 			entrada.close();
-		}catch (DniInvalido e) {
-			throw e;
+		
 		}catch(IOException e){
 			System.out.println("No se encontro el archivo");
+		}catch(Exception e) {
+			System.out.println("Error " + e);
 		}
 		return listPersonas;
 	}
 	
 	private Persona separarCampos(String linea) {
-		Persona persona = new Persona();
-		String[] p = linea.split("-");
-		persona.setNombre(p[0]);
-		persona.setApellido(p[1]);
-		persona.setDni(p[2]);
-		return persona;
+		if (!linea.equals("")) {
+			Persona persona = new Persona();
+			String[] p = linea.split("-");
+			persona.setNombre(p[0]);
+			persona.setApellido(p[1]);
+			persona.setDni(p[2]);
+			return persona;
+		}
+		else {
+			return null;
+		}
 	}
 
 	//Getters and Setters

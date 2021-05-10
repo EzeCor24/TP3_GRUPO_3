@@ -10,7 +10,5 @@ public class DniInvalido extends IOException{
 	public String getMessage() {
 		return "Error: el DNI no puede contener letras";
 	}
-	
-	
 
 }
